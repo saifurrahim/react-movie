@@ -16,6 +16,19 @@ const movieService = {
         }
     },
 
+    async getGenreList(): Promise<any> {
+        try{
+            const response = await axios.get(`${apiBaseUrl}/genre/movie/list`);
+
+            return response.data.genres;
+        }
+        catch(error)
+        {
+            console.error(error);
+            throw error;
+        }
+    },
+
     getImagePath(image: string): string {
         return `${imageBaseUrl}${image}`;
     }
