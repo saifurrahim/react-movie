@@ -21,6 +21,7 @@ jobs:
       - name: Build and deploy
         env:
           VITE_TMDB_API_BASE_URL: "https://api.themoviedb.org/3/"
+          VITE_TMDB_IMAGE_BASE_URL: "https://image.tmdb.org/t/p/original/"
         run: |
           npm run build
           npm run deploy

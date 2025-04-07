@@ -3,22 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-function test()
-{
-  const endpoint = 'movie/now_playing'; // Replace with the desired endpoint
-  const url = `/tmdb-api/${endpoint}`;
-
-  fetch(url)
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
-
-}
-
 function App() {
   const [count, setCount] = useState(0)
-
-  test();
 
   return (
     <>
