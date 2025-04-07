@@ -1,0 +1,26 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set API access token
+        env:
+          VITE_TMDB_API_ACCESS_TOKEN: ${{ secrets.VITE_TMDB_API_ACCESS_TOKEN }}
+        run: |
+          echo "VITE_TMDB_API_ACCESS_TOKEN=$VITE_TMDB_API_ACCESS_TOKEN" >> $GITHUB_ENV
+
+      - name: Build and deploy
+        env:
+          VITE_TMDB_API_BASE_URL: "https://api.themoviedb.org/3/"
+        run: |
+          npm run build
+          npm run deploy
