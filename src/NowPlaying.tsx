@@ -22,13 +22,27 @@ function NowPlaying()
 
     return (
         <>
-        <div id="nowPlaying" className="bg-indigo-500 h-[500px] grid md:grid-cols-3">
+        <div id="nowPlaying" className="bg-indigo-500 h-[500px] flex">
 
-            <div className="bg-green-300 hidden md:block"></div>
-            <div className="col-span-2 bg-orange-300 relative">
-                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit possimus animi, repudiandae, fugiat cum iste aliquam similique atque culpa excepturi repellat nam aliquid tenetur sit eos. Dignissimos velit veniam sint.</span>
+            <div className="bg-green-300 hidden md:block basis-auto shrink-0 h-[500px]">
+                
+            <img src="https://image.tmdb.org/t/p/original//yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg" alt="" className="h-full"/>
+            </div>
+            <div className="bg-orange-300 relative bg-[url(https://image.tmdb.org/t/p/original/2Nti3gYAX513wvhp8IiLL6ZDyOm.jpg)] bg-cover">
+                <div className="h-full w-full bg-[rgba(0,0,0,.25)] text-white">
+                    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In omnis facere eligendi laboriosam, distinctio eum deserunt dolor corporis voluptatem cupiditate, ratione nemo aliquam quis dignissimos modi ullam tempora explicabo officia?</span>
+                </div>
 
-                <ul className="absolute bottom-0 right-0 w-full bg-pink-500 h-[150px]"></ul>
+                <div className="absolute bottom-0 right-0 w-full h-[150px] rounded bg-[rgba(0,0,0,.5)] p-2 shadow-md">
+                    <ul className="flex gap-2 overflow-x-auto overflow-y-hidden h-full w-full">
+                        {movies.map((movie: any, index : number) => {
+                            return <li key={index} className="basis-auto shrink-0">
+                                <img src={movieService.getImagePath(movie.poster_path)} alt={movie.original_title} className="h-full"/>
+                            </li>
+                        })}
+                    </ul>
+                </div>
+
             </div>
 {/* 
             <div className="w-full h-full flex flex-col">
