@@ -49,11 +49,13 @@ function NowPlaying()
             </div>
 
             <div key="backdrop" className="bg-orange-300 relative" style={{backgroundImage: `url(${movieService.getImagePath(movie?.backdrop_path ?? "")})`, backgroundSize: 'cover'}}>
-                <div className="h-full w-full bg-[rgba(0,0,0,.25)] text-white p-4">
+                <div className="h-full w-full bg-[rgba(0,0,0,.5)] text-white p-4 flex flex-col">
                     <h2 key="title" className="font-bold text-2xl">{movie?.original_title}</h2>
                     <span key="overview">
                         {movie?.overview}
                     </span>
+                    <span key="voteAverage" className="">{movie?.vote_average} Ratings</span>
+                    <span key="voteCount" className="">{movie?.vote_count} Votes</span>
                 </div>
 
                 <div className="absolute bottom-0 right-0 w-full h-[150px] rounded bg-[rgba(0,0,0,.5)] p-2 shadow-md">
