@@ -10,15 +10,21 @@ function NowPlaying()
 
     const [movies, setMovies] = useState([]);
     const [movie, setMovie] = useState<Movie | null>(null);
+    const [isLoading, setLoading] = useState(false);
 
     const movieContext = useContext(context);
 
     const listClick = (e : React.MouseEvent<HTMLElement>, listIndex : number) => {
         document.querySelector('#nowPlaying ul li.active')?.classList.remove('active');
 
+        setLoading(true);
+
         let movie = movies[listIndex] as Movie;
 
-        setMovie(movie);
+        setTimeout(() => {
+            setMovie(movie);
+            setLoading(false);
+        }, 500);
 
         e.currentTarget.classList.add('active');
     };
@@ -42,20 +48,26 @@ function NowPlaying()
         <div id="nowPlaying" className="bg-indigo-500 h-[500px] flex">
 
             <div className="bg-green-300 hidden md:block basis-auto shrink-0 h-[500px] relative">
-                <img key="poster" src={((movie?.poster_path ?? "") == "" ? undefined : movieService.getImagePath(movie?.poster_path ?? ""))} alt="" className="h-full"/>
+                <img key="poster" src={((movie?.poster_path ?? "") == "" ? undefined : movieService.getImagePath(movie?.poster_path ?? ""))} alt="Poster" className="h-full transition-opacity duration-500" style={{opacity: isLoading ? 0 : 1}}/>
                 <div className="absolute bottom-0 right-0 bg-[rgba(255,0,0,.25)] p-2">
                     <span className="text-white font-bold text-2xl">Now Playing</span>
                 </div>
             </div>
 
-            <div key="backdrop" className="bg-orange-300 relative" style={{backgroundImage: `url(${movieService.getImagePath(movie?.backdrop_path ?? "")})`, backgroundSize: 'cover'}}>
-                <div className="h-full w-full bg-[rgba(0,0,0,.5)] text-white p-4 flex flex-col">
-                    <h2 key="title" className="font-bold text-2xl">{movie?.original_title}</h2>
-                    <span key="overview">
-                        {movie?.overview}
-                    </span>
-                    <span key="voteAverage" className="">{movie?.vote_average} Ratings</span>
-                    <span key="voteCount" className="">{movie?.vote_count} Votes</span>
+            <div className="bg-orange-300 relative" >
+                <div key="backdrop" className="h-full w-full text-white p-4 flex flex-col transition-opacity duration-500" style={{backgroundImage: `url(${movieService.getImagePath(movie?.backdrop_path ?? "")})`, backgroundSize: 'cover', opacity: isLoading ? 0 : 1}}>
+                    <article className="bg-[rgba(0,0,0,.5)] p-2 rounded">
+                        <h2 key="title" className="font-bold text-2xl">{movie?.original_title}</h2>
+                        
+                        <div className="my-2">
+                            <span key="voteAverage" className="bg-white rounded-full px-3 py-1 text-black shadow-md">Score : <b>{movie?.vote_average.toFixed(2)}</b> / 10.00</span>
+                            <small key="voteCount" className="font-semibold"> from {movie?.vote_count} votes</small>
+                        </div>
+
+                        <p key="overview">
+                            {movie?.overview}
+                        </p>
+                    </article>
                 </div>
 
                 <div className="absolute bottom-0 right-0 w-full h-[150px] rounded bg-[rgba(0,0,0,.5)] p-2 shadow-md">
