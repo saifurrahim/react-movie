@@ -1,3 +1,65 @@
 #nowPlaying ul li.active {
     border: .5em solid gold;
 }
+
+.clapper {
+    position: relative;
+    width: 100px;
+    height: 64px;
+    background-color: black;
+    transform: rotate(-10deg);
+    animation: scratchingAnimation .5s ease infinite alternate;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: -12px;
+        width: 100px;
+        height: 12px;
+        background: repeating-linear-gradient(45deg, black, black 10px, white 10px, white 20px);
+        transform: rotate(-10deg);
+        transform-origin: 0 100%;
+        animation: clappingAnimation .5s ease infinite alternate;
+    }
+
+    &::after {
+        content: 'Loading...';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100px;
+        height: 64px;
+        background: repeating-linear-gradient(-45deg, black, black 10px, white 10px, white 20px);
+        background-size: 100% 12px;
+        background-repeat: no-repeat;
+        background-position: top;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+
+    }
+}
+
+@keyframes clappingAnimation {
+    from {
+        transform: rotate(-10deg);
+    }
+    to {
+        transform: rotate(0);
+    }
+}
+
+@keyframes scratchingAnimation {
+    0% {
+        transform: rotate(-10deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-10deg);
+    }
+}
