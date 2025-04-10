@@ -25,6 +25,32 @@ const movieService = {
         }
     },
 
+    async getPopularList(): Promise<any> {
+        try{
+
+            const response = await axios.get(`${apiBaseUrl}/movie/popular`);
+            return response.data.results;
+        }
+        catch(error)
+        {
+            console.error(error);
+            throw error;
+        }
+    },
+
+    async getTopRatedList(): Promise<any> {
+        try{
+
+            const response = await axios.get(`${apiBaseUrl}/movie/top_rated`);
+            return response.data.results;
+        }
+        catch(error)
+        {
+            console.error(error);
+            throw error;
+        }
+    },
+
     async getGenreList(): Promise<any> {
         try{
             
