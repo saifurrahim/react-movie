@@ -61,8 +61,8 @@ function NowPlaying()
                 </div>
 
                 <div className="bg-gray-300 relative" >
-                    <div key="backdrop" className="h-full w-full text-white p-4 flex flex-col transition-opacity duration-500" style={{backgroundImage: `url(${movieService.getImagePath(movie?.backdrop_path ?? "")})`, backgroundSize: 'cover', opacity: isTransitioning ? .25 : 1}}>
-                        <article className="bg-[rgba(0,0,0,.5)] p-2 rounded">
+                    <div key="backdrop" className="h-full w-full text-white p-4 transition-opacity duration-500" style={{backgroundImage: `url(${movieService.getImagePath(movie?.backdrop_path ?? "")})`, backgroundSize: 'cover', opacity: isTransitioning ? .25 : 1}}>
+                        <article className="bg-[rgba(0,0,0,.5)] p-2 rounded flex flex-col h-[320px]">
                             <h2 key="title" className="font-bold text-2xl">{movie?.original_title}</h2>
                             
                             <div className="my-2">
@@ -70,9 +70,11 @@ function NowPlaying()
                                 <small key="voteCount" className="font-semibold"> from {movie?.vote_count} votes</small>
                             </div>
 
-                            <p key="overview">
+                            <p key="overview" className="flex-1 overflow-y-auto mb-2">
                                 {movie?.overview}
                             </p>
+
+                            <span key="genres">Genres : {movieContext.getGenreNames(movie?.genre_ids ?? [])}</span>
                         </article>
                     </div>
 
