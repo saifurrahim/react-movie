@@ -41,8 +41,17 @@ const movieService = {
     async getTopRatedList(): Promise<any> {
         try{
 
-            const response = await axios.get(`${apiBaseUrl}/movie/top_rated`);
-            return response.data.results;
+            var results;
+
+            await fetch('/top_rated.json')
+            .then(response => response.json())
+            .then(data => results = data)
+            .catch(error => console.error(error));
+
+            return results;
+
+            // const response = await axios.get(`${apiBaseUrl}/movie/top_rated`);
+            // return response.data.results;
         }
         catch(error)
         {

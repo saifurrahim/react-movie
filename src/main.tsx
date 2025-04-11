@@ -1,12 +1,13 @@
 import { createRoot } from 'react-dom/client'
 import { MovieContainer } from './MovieApp'
 import NowPlaying from './NowPlaying'
+import TopRated from './TopRated'
 
 createRoot(document.getElementById('root')!).render(
     <MovieContainer>
-      <div className='grid grid-rows-3'>
+      <div className='flex flex-col'>
       <NowPlaying />
-      <div className='bg-red-300'></div>
+      <TopRated/>
       <div className='bg-blue-300'></div>
       </div>
     </MovieContainer>,
