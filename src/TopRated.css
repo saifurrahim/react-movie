@@ -1,0 +1,28 @@
+.top-rated-poster {
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        height: 100%;
+        width: 10px;
+        background-color: rgba(255,255,255,.3);
+        position: absolute;
+        top: 0;
+        left: -40px;
+        transform: skewX(-30deg);
+        animation: slide 2.5s infinite;
+    }
+}
+
+@keyframes slide {
+    0% {
+        left: -40px;
+    }
+    80% {
+        left: -40px;
+    }
+    100% {
+        left: 100px;
+    }
+}

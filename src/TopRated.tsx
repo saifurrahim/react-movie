@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import movieService from "./services/movie.service";
 import Movie from "./models/Movie";
+import { context } from "./MovieApp";
+import "./TopRated.css"
 
 function TopRated() {
     const [movies, setMovies] = useState([]);
+    const movieContext = useContext(context);
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -18,12 +21,23 @@ function TopRated() {
 
     return (
         <>
-        <div className="bg-red-500">
-            <ul>
+        <div id="TopRated" className="bg-red-500 p-2">
+            <h2 className="text-2xl font-bold text-white">Top Rated</h2>
+            <ul className="grid md:grid-cols-3">
                 {movies.map((movie : Movie, index : number) => {
-                    return <li key={index}>
-                        <b>{movie.title}</b>
-                        <p>{movie.overview}</p>
+                    return <li key={index} className="flex gap-2 my-2">
+                        <span>#{index+1}</span>
+                        <div className="top-rated-poster">
+                            <img src={movieService.getImagePath(movie.poster_path)} alt={movie.title} className="w-[64px]"/>
+                        </div>
+                        <div className="block">
+                            <h3>{movie.title}</h3>
+                            <div className="my-2">
+                                <span key="voteAverage" className="bg-white rounded-full px-3 py-1 text-black shadow-md">Score : <b>{movie?.vote_average.toFixed(2)}</b> / 10.00</span>
+                                <small key="voteCount" className="font-semibold"> from {movie?.vote_count} votes</small>
+                            </div>
+                            <span>{movieContext.getGenreNames(movie.genre_ids)}</span>
+                        </div>
                     </li>
                 })}
             </ul>
