@@ -6,6 +6,7 @@ export default defineConfig(({mode}) => {
   const env = loadEnv(mode, './');
 
   return {
+    base: '/react-movie/',
     plugins: [react()],
     envDir: './',
     server: {

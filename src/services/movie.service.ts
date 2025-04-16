@@ -8,7 +8,7 @@ const movieService = {
         try{
             var results;
             
-            await fetch('/now_playing.json')
+            await fetch(`${import.meta.env.BASE_URL}/now_playing.json`)
             .then(response => response.json())
             .then(data => results = data)
             .catch(error => console.error(error));
@@ -43,7 +43,7 @@ const movieService = {
 
             var results;
 
-            await fetch('/top_rated.json')
+            await fetch(`${import.meta.env.BASE_URL}/top_rated.json`)
             .then(response => response.json())
             .then(data => results = data)
             .catch(error => console.error(error));
@@ -65,7 +65,7 @@ const movieService = {
             
             var results;
             
-            await fetch('/genre.json')
+            await fetch(`${import.meta.env.BASE_URL}/genre.json`)
             .then(response => response.json())
             .then(data => results = data)
             .catch(error => console.error(error));
